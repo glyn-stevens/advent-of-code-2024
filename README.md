@@ -2,6 +2,8 @@
 
 Glyn's advent of code 2024, lets see how this goes!
 
+Assertions to be equal to the answers are added after solution is found to allow safe refactoring.
+
 ## Setup
 Using poetry for package management. To setup venv folder with environment:
 ```shell
