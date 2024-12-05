@@ -36,6 +36,6 @@ def _solve_with_log(input: T, solver: Callable[[T], U], description: str) -> U:
     return output
 
 
-def read_input(day: int) -> list[str]:
-    with open(ASSETS_DIR / f"day_{day}.txt") as f:
+def read_input(name: str) -> list[str]:
+    with open(ASSETS_DIR / name) as f:
         return list(f.readlines())
