@@ -4,7 +4,7 @@ from advent_of_code.utils import read_input
 
 @fixture
 def input():
-    return read_input(name=4)
+    return read_input("day_4.txt")
     
 def test_part_1(input):
     assert part_1(input) == 2571
