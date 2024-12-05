@@ -1,5 +1,7 @@
 from typing import Callable, TypeVar
 
+from advent_of_code import ASSETS_DIR
+
 T = TypeVar("T")
 U = TypeVar("U")
 INDENT = "    "
@@ -32,3 +34,8 @@ def _solve_with_log(input: T, solver: Callable[[T], U], description: str) -> U:
     output = solver(input)
     print(f"{INDENT}👉 Solution: {output}")
     return output
+
+
+def read_input(day: int) -> list[str]:
+    with open(ASSETS_DIR / f"day_{day}.txt") as f:
+        return list(f.readlines())

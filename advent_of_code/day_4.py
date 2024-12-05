@@ -1,25 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from advent_of_code import ASSETS_DIR
-from advent_of_code.utils import solve, test
-
-TEST_SAMPLE_BOTH_PARTS = [
-    [
-        "MMMSXXMASM",
-        "MSAMXMSMSA",
-        "AMXSXMAAMM",
-        "MSAMASMSMX",
-        "XMASAMXAMM",
-        "XXAMMXXAMA",
-        "SMSMSASXSS",
-        "SAXAMASAAA",
-        "MAMMMXMMMM",
-        "MXMXAXMASX",
-    ]
-]
-EXPECTED_PART_1 = [18]
-EXPECTED_PART_2 = [9]
+from advent_of_code.utils import read_input, solve
 
 
 @dataclass
@@ -30,12 +12,8 @@ class Index:
 
 def main():
     print(f"Running script {Path(__file__).name}...")
-    with open(ASSETS_DIR / "day_4.txt") as f:
-        input = list(f.readlines())
-
-    test(TEST_SAMPLE_BOTH_PARTS, part_1, "Test part 1", EXPECTED_PART_1)
+    input = read_input(day=4)
     solve(input, part_1, "Part 1", expected=2571)
-    test(TEST_SAMPLE_BOTH_PARTS, part_2, "Test part 2", EXPECTED_PART_2)
     solve(input, part_2, "Part 2", expected=1992)
 
 
