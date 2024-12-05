@@ -31,7 +31,7 @@ def count_for(val: int, unique_counts: Any) -> int:
 
 
 def get_sorted_col(idx: int) -> np.ndarray[Any, np.dtype[np.float64]]:
-    col = np.loadtxt(ASSETS_DIR / "day_1_1.txt", usecols=idx)
+    col = np.loadtxt(ASSETS_DIR / "day_1.txt", usecols=idx)
     col.sort()
     return col
 
