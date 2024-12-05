@@ -39,3 +39,14 @@ def _solve_with_log(input: T, solver: Callable[[T], U], description: str) -> U:
 def read_input(name: str) -> list[str]:
     with open(ASSETS_DIR / name) as f:
         return list(f.readlines())
+
+
+def idx_of_first_match(a_list: list[T], match: T) -> int:
+    try:
+        return next(idx for (idx, val) in enumerate(a_list) if val == match)
+    except StopIteration:
+        raise StopIteration(f"Could not find '{match}' in input: {a_list}")
+
+
+def maybe_idx_of_first_match(a_list: list[T], match: T) -> int | None:
+    return next((idx for (idx, val) in enumerate(a_list) if val == match), None)
