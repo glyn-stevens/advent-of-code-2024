@@ -15,7 +15,7 @@ One file per day to be run as script.
 
 Run with, for example:
 ```shell
-poetry run python -m advent_of_code.day_1
+poetry run python advent_of_code/day_1.py
 ```
 
 ## Lint
