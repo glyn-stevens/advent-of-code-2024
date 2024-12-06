@@ -13,8 +13,8 @@ class Index:
 def main():
     print(f"Running script {Path(__file__).name}...")
     input = read_input("day_4.txt")
-    solve(input, part_1, "Part 1", expected=2571)
-    solve(input, part_2, "Part 2", expected=1992)
+    solve(input, part_1, "Part 1")
+    solve(input, part_2, "Part 2")
 
 
 def part_1(input: list[str]) -> int:

@@ -4,10 +4,7 @@ from typing import Callable, TypeVar
 from advent_of_code import ASSETS_DIR
 
 TEST_SAMPELES_PART_1 = [
-    (
-        [42, 44, 47, 49, 51, 52, 54, 52],
-        False,
-    ),  # Added manually as the rest of the checks were correct, but this still failed
+    ([42, 44, 47, 49, 51, 52, 54, 52], False),
     ([7, 6, 4, 2, 1], True),
     ([1, 2, 7, 8, 9], False),
     ([9, 7, 6, 2, 1], False),
@@ -15,6 +12,7 @@ TEST_SAMPELES_PART_1 = [
     ([8, 6, 4, 4, 1], False),
     ([1, 3, 6, 7, 9], True),
 ]
+
 TEST_SAMPELES_PART_2 = [
     ([42, 44, 47, 49, 51, 52, 54, 52], True),
     ([7, 6, 4, 2, 1], True),

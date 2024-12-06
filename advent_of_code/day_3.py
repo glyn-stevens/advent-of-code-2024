@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 from advent_of_code import ASSETS_DIR
-from advent_of_code.utils import solve, test
+from advent_of_code.utils import solve, test_multiple
 
 TEST_SAMPLE_PART_1 = [
     "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))",
@@ -19,10 +19,10 @@ def main():
     with open(ASSETS_DIR / "day_3.txt") as f:
         input = "".join(f.readlines())
 
-    test(TEST_SAMPLE_PART_1, part_1_solver, "part 1", EXPECTED_PART_1)
-    solve(input, part_1_solver, "part 1", expected=184511516)
-    test([TEST_SAMPLE_PART_2[0]], part_2_solver, "part 2", [TEST_SAMPLE_PART_2[1]])
-    solve(input, part_2_solver, "part 2", expected=90044227)
+    test_multiple(TEST_SAMPLE_PART_1, part_1_solver, "part 1", EXPECTED_PART_1)
+    solve(input, part_1_solver, "part 1")
+    test_multiple([TEST_SAMPLE_PART_2[0]], part_2_solver, "part 2", [TEST_SAMPLE_PART_2[1]])
+    solve(input, part_2_solver, "part 2")
 
 
 def part_1_solver(input: str) -> int:

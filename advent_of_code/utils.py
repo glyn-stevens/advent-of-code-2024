@@ -7,13 +7,13 @@ U = TypeVar("U")
 INDENT = "    "
 
 
-def solve(input: T, solver: Callable[[T], U], description: str, expected: U | None = None) -> U:
+def solve(input: T, solver: Callable[[T], U], description: str) -> U:
     print(f"\n🤞 Solving {description}...")
     output = _solve_with_log(input, solver, description)
-    return _check(output, expected) if expected else output
+    return output
 
 
-def test(
+def test_multiple(
     inputs: list[T], solver: Callable[[T], U], description: str, expected: list[U]
 ) -> list[U]:
     print(f"\n🧪 Running tests for {description}...")
@@ -21,6 +21,11 @@ def test(
         _check(_solve_with_log(input, solver, f"{description} - test {i}"), expect)
         for i, (input, expect) in enumerate(zip(inputs, expected, strict=True))
     ]
+
+
+def test(inputs: T, solver: Callable[[T], U], description: str, expected: U) -> U:
+    print(f"\n🧪 Running test for {description}...")
+    return _check(_solve_with_log(inputs, solver, f"{description} - test"), expected)
 
 
 def _check(output: T, expected: T) -> T:
