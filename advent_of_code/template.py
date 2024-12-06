@@ -1,10 +1,12 @@
 from pathlib import Path
-from advent_of_code.utils import read_input, solve
+from advent_of_code.utils import read_input, solve, test
 
 
 def main():
     print(f"Running script {Path(__file__).name}...")
     inputs = read_input("day_5.txt")
+    sample_inputs = read_input("day_5_sample.txt")
+    test(sample_inputs, part_1, "Part 1 test", expected=0)
     solve(inputs, part_1, "Part 1")
 
 

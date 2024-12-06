@@ -55,3 +55,7 @@ def idx_of_first_match(a_list: list[T], match: T) -> int:
 
 def maybe_idx_of_first_match(a_list: list[T], match: T) -> int | None:
     return next((idx for (idx, val) in enumerate(a_list) if val == match), None)
+
+
+def replace_item_in_list(a_list: list[T], idx: int, new_item: T) -> list[T]:
+    return a_list[:idx] + [new_item] + a_list[idx+1:]
