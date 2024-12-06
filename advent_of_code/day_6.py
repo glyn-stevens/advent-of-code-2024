@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+
+import numpy as np
 from advent_of_code.utils import read_input, solve, test, replace_item_in_list, idx_of_first_match
 
 
@@ -30,7 +32,6 @@ def parse_grid_value(char: str) -> GridValue:
         case _:
             raise ValueError(f"Got unexpected input item {char}")
 
-Grid = list[list[GridValue]]
 
 @dataclass
 class Position:
@@ -39,7 +40,7 @@ class Position:
 
 @dataclass
 class Area:
-    grid: Grid
+    grid: np.ndarray
     guard_position: Position
     guard_direction: Direction
 
@@ -68,14 +69,15 @@ def update_area_col(area: Area, col_idx: int, new_col: list[GridValue], new_guar
     new_grid = [replace_item_in_list(row, col_idx, new_col[row_idx]) for (row_idx, row) in enumerate(area.grid)]
     return Area(grid=new_grid, guard_position=new_guard_position, guard_direction=new_guard_dir)
 
-def next_obstacle(area: Area) -> Position:
     
 
 def parse_area(inputs: list[str]) -> Area:
-    grid = [[parse_grid_value(char) for char in line] for line in inputs]
+    grid = np.array([[parse_grid_value(char) for char in line] for line in inputs])
     guard_row = next(i for (i,row) in enumerate(grid) if GridValue.GUARD_BEEN in row)
     guard_col = idx_of_first_match(grid[guard_row], GridValue.GUARD_BEEN)
     return Area(grid, guard_position=Position(guard_row, guard_col))
+
+def next_obstacle(area: Area) -> Position:
 
 def main():
     print(f"Running script {Path(__file__).name}...")
@@ -88,8 +90,9 @@ def main():
 def part_1(inputs: list[str]) -> int:
     area = parse_area(inputs)
     while area.guard_there:
+        next_obstacle
         match area.guard_direction:
-            case Direction.N:
+            case Direction.N | Direction.S:
                 new_col = area.col[]
                 area = update_area_col(area, area.guard_position.row_idx, )
 
