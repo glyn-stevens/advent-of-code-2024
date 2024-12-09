@@ -12,28 +12,28 @@ class Index:
 
 def main():
     print(f"Running script {Path(__file__).name}...")
-    input = read_input("day_4.txt")
-    solve(input, part_1, "Part 1")
-    solve(input, part_2, "Part 2")
+    inputs = read_input("day_4.txt")
+    solve(inputs, part_1, "Part 1")
+    solve(inputs, part_2, "Part 2")
 
 
-def part_1(input: list[str]) -> int:
+def part_1(inputs: list[str]) -> int:
     total = 0
-    for row, line in enumerate(input):
+    for row, line in enumerate(inputs):
         for col, char in enumerate(line):
             if char == "X":
                 words_possible = [
-                    word_from_grid(input, Index(row, col), dir, length=4) for dir in Direction
+                    word_from_grid(inputs, Index(row, col), dir, length=4) for dir in Direction
                 ]
                 total += len([w for w in words_possible if w == "XMAS"])
     return total
 
 
-def part_2(input: list[str]) -> int:
+def part_2(inputs: list[str]) -> int:
     total = 0
-    for row, line in enumerate(input):
+    for row, line in enumerate(inputs):
         for col, char in enumerate(line):
-            if char == "A" and cross_mas_found(input, Index(row, col)):
+            if char == "A" and cross_mas_found(inputs, Index(row, col)):
                 total += 1
     return total
 
