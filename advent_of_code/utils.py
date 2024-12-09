@@ -59,3 +59,7 @@ def maybe_idx_of_first_match(a_list: list[T], match: T) -> int | None:
 
 def replace_item_in_list(a_list: list[T], idx: int, new_item: T) -> list[T]:
     return a_list[:idx] + [new_item] + a_list[idx + 1 :]
+
+
+def flatten(list_of_list: list[list[T]]) -> list[T]:
+    return [x for inner_list in list_of_list for x in inner_list]
