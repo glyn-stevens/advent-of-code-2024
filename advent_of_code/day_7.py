@@ -55,7 +55,7 @@ T = TypeVar("T")
 
 def combinations(items: list[T], num_operators: int) -> Iterator[tuple[T, ...]]:
     combs = itertools.combinations_with_replacement(items, num_operators)
-    return flatten([distinct_permutations(c) for c in combs])
+    return flatten([distinct_permutations(c) for c in combs])  # type: ignore
 
 
 def equation_solvable(eq: Equation, allowed_ops: list[Op]) -> bool:
@@ -96,14 +96,14 @@ def part_1(inputs: list[Equation]) -> int:
 
 
 def part_2_brute_force(inputs: list[Equation]) -> int:
-    solvable = [eq for eq in inputs if equation_solvable_brute_force(eq, [Op.MULTIPLY, Op.ADD, Op.CONCAT])]
+    solvable = [
+        eq for eq in inputs if equation_solvable_brute_force(eq, [Op.MULTIPLY, Op.ADD, Op.CONCAT])
+    ]
     return sum(eq.target for eq in solvable)
 
 
 def part_2_fast(inputs: list[Equation]) -> int:
-    solvable = [
-        eq for eq in inputs if equation_solvable(eq, [Op.MULTIPLY, Op.ADD, Op.CONCAT])
-    ]
+    solvable = [eq for eq in inputs if equation_solvable(eq, [Op.MULTIPLY, Op.ADD, Op.CONCAT])]
     return sum(eq.target for eq in solvable)
 
 
