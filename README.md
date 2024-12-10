@@ -1,8 +1,6 @@
 # advent-of-code-2024
 
-Glyn's advent of code 2024, lets see how this goes!
-
-Assertions to be equal to the answers are added after solution is found to allow safe refactoring.
+Glyn's solutions to the [advent of code 2024 puzzles](https://adventofcode.com/2024), lets see how this goes!
 
 ## Setup
 Using poetry for package management. To setup venv folder with environment:
@@ -44,6 +42,10 @@ and the solution did take ~50s to solve using this method.
 With some time left, I managed to use tree logic to discount many of the possibilities much earlier in the checking process.
 This reduced time from ~50s to under 0.1s.
 
+### Day 8
+Good handling of the grid (i.e. just storing the locations of the important items rather than storing the value for each cell in the grid)
+helped the solver run very quickly, and a nice `print_grid()` function taking this storage of the grid as inputs still allowed easy debugging.
+
 ## Lint
 ```shell
 bin/list.ps1
@@ -51,6 +53,7 @@ bin/list.ps1
 
 ## Tests
 Starting from when it got more complex, tests added to prevent regression.
+Prior to this, assertions are added after solution is found to allow safe refactoring.
 ```shell
 poetry run pytest
 ```

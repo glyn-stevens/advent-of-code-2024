@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, Iterable
 
 from advent_of_code import ASSETS_DIR
 
@@ -46,6 +46,11 @@ def read_input(name: str) -> list[str]:
         return list(f.readlines())
 
 
+def read_input_stripped(name: str) -> list[str]:
+    with open(ASSETS_DIR / name) as f:
+        return [x.strip() for x in list(f.readlines())]
+
+
 def idx_of_first_match(a_list: list[T], match: T) -> int:
     try:
         return next(idx for (idx, val) in enumerate(a_list) if val == match)
@@ -61,5 +66,5 @@ def replace_item_in_list(a_list: list[T], idx: int, new_item: T) -> list[T]:
     return a_list[:idx] + [new_item] + a_list[idx + 1 :]
 
 
-def flatten(list_of_list: list[list[T]]) -> list[T]:
+def flatten(list_of_list: list[Iterable[T]]) -> list[T]:
     return [x for inner_list in list_of_list for x in inner_list]
