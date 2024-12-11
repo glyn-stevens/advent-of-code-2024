@@ -46,6 +46,14 @@ This reduced time from ~50s to under 0.1s.
 Good handling of the grid (i.e. just storing the locations of the important items rather than storing the value for each cell in the grid)
 helped the solver run very quickly, and a nice `print_grid()` function taking this storage of the grid as inputs still allowed easy debugging.
 
+### Day 11
+Sometimes the only way to work out what trap has been set… is to walk into it.
+Brute force part 1 approach predictably got punished, 
+but by a simple tripling of the number of iterations it needed to run for rather than any changing of the rules.
+
+By the final iteration of part 2, keeping track of duplicated values together (i.e. with a value and count rather than just a list of values) 
+reduced the amount of calculations by a factor of 40 billion, which is a reduction of 180 trillion calculations per cycle!
+
 ## Lint
 ```shell
 bin/list.ps1
