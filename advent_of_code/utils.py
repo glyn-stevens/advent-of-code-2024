@@ -68,3 +68,7 @@ def replace_item_in_list(a_list: list[T], idx: int, new_item: T) -> list[T]:
 
 def flatten(list_of_list: list[Iterable[T]]) -> list[T]:
     return [x for inner_list in list_of_list for x in inner_list]
+
+
+def combine_sets(iterable_of_sets: Iterable[set[T]]) -> set[T]:
+    return set().union(*iterable_of_sets)
