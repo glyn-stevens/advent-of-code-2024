@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Callable, TypeVar, Iterable
 
 from advent_of_code import ASSETS_DIR
@@ -72,3 +73,11 @@ def flatten(list_of_list: list[Iterable[T]]) -> list[T]:
 
 def combine_sets(iterable_of_sets: Iterable[set[T]]) -> set[T]:
     return set().union(*iterable_of_sets)
+
+@dataclass(frozen=True)
+class Coord:
+    x: int
+    y: int
+
+    def __repr__(self):
+        return f"({self.x}, {self.y})"
