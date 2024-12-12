@@ -84,7 +84,7 @@ def positions_in_line_in_grid(
     start: Position, grid_size: Position, x_increment: int, y_increment: int
 ) -> set[Position]:
     antinodes = set()
-    for multiplier in range(0, max(grid_size.x, grid_size.y)): # Allow stepping until at least edge of grid
+    for multiplier in range(max(grid_size.x, grid_size.y)):
         antinode = Position(start.x - x_increment * multiplier, start.y - y_increment * multiplier)
         if not in_grid(antinode, grid_size):
             break

@@ -31,7 +31,7 @@ def cycle_multiple(inputs: list[int]) -> list[int]:
 
 
 def cycle_with_count(input_values_by_count: dict[int, int]) -> dict[int, int]:
-    cycled_values_by_count = dict()
+    cycled_values_by_count: dict[int, int] = dict()
     for value, quantity in input_values_by_count.items():
         for result in cycle(value):
             cycled_values_by_count[result] = quantity + cycled_values_by_count.get(result, 0)
