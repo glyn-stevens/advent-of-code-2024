@@ -11,5 +11,5 @@ def inputs():
 def test_part_1(inputs):
     assert part_1(inputs) == 1467094
 
-# def test_part_2(inputs):
-#     assert part_2(inputs) == 276661131175807
+def test_part_2(inputs):
+    assert part_2(inputs) == 881182
