@@ -65,13 +65,13 @@ def extract_regions(grid: list[str]) -> list[Region]:
     regions: list[Region] = []
     for y, line in enumerate(grid):
         for x, char in enumerate(line):
-            plot = Coord(x, y)
-            if any(plot in region.cells for region in regions):
-                # Plot has already been assigned to a region
+            cell = Coord(x, y)
+            if any(cell in region.cells for region in regions):
+                # Cell has already been assigned to a region
                 continue
             else:
-                plots, edges = find_cells_edges_in_region(plot, set(), grid)
-                regions.append(Region(cells=plots, edges=edges))
+                cells, edges = find_cells_edges_in_region(cell, set(), grid)
+                regions.append(Region(cells=cells, edges=edges))
     return regions
 
 
@@ -91,10 +91,10 @@ def find_cells_edges_in_region(
             edges.add(Edge(investigating, dir))
         else:
             # Adjacent cell is in region. Recursively find cells and edges from that cell.
-            plots_to_add, edges_to_add = find_cells_edges_in_region(
+            cells_to_add, edges_to_add = find_cells_edges_in_region(
                 adjacent_cell, cells_in_region, grid
             )
-            cells_in_region |= plots_to_add
+            cells_in_region |= cells_to_add
             edges |= edges_to_add
     return cells_in_region, edges
 
