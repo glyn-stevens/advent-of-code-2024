@@ -54,6 +54,13 @@ but by a simple tripling of the number of iterations it needed to run for rather
 By the final iteration of part 2, keeping track of duplicated values together (i.e. with a value and count rather than just a list of values) 
 reduced the amount of calculations by a factor of 40 billion, which is a reduction of 180 trillion calculations per cycle!
 
+### Day 13
+Vectors! Unless the vectors are parallel, there's only one solution. 
+A nice dataclass with some of the dunder methods like `__add__` defined helped.
+Could have utilised vector package on pypi alternatively.
+
+The twist for part b wasn't expected, and led to a big re-write and deeper dive into vector calculations.
+
 ## Lint
 ```shell
 bin/list.ps1

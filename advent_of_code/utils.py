@@ -1,3 +1,5 @@
+from __future__ import annotations
+import math
 from dataclasses import dataclass
 from typing import Callable, TypeVar, Iterable
 
@@ -81,4 +83,29 @@ class Coord:
     y: int
 
     def __repr__(self):
-        return f"({self.x}, {self.y})"
+        return f"C({self.x}, {self.y})"
+
+
+@dataclass(frozen=True)
+class Vector:
+    x: int
+    y: int
+
+    @property
+    def magnitude(self):
+        return math.sqrt(self.x**2 + self.y**2)
+
+    def determinant(self, v2: Vector) -> float:
+        return self.x * v2.y - self.y * v2.x
+
+    def __repr__(self):
+        return f"V({self.x}, {self.y})"
+
+    def __sub__(self, other: Vector):
+        return Vector(self.x - other.x, self.y - other.y)
+
+    def __add__(self, other: Vector):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __mul__(self, other: int):
+        return Vector(self.x * other, self.y * other)
