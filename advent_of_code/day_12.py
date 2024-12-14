@@ -63,15 +63,14 @@ def main():
 
 def extract_regions(grid: list[str]) -> list[Region]:
     regions: list[Region] = []
+    visited = set()
     for y, line in enumerate(grid):
         for x, char in enumerate(line):
             cell = Coord(x, y)
-            if any(cell in region.cells for region in regions):
-                # Cell has already been assigned to a region
-                continue
-            else:
+            if cell not in visited:
                 cells, edges = find_cells_edges_in_region(cell, set(), grid)
                 regions.append(Region(cells=cells, edges=edges))
+                visited |= cells
     return regions
 
 
@@ -103,13 +102,19 @@ def extract_sides(bag_of_edges: set[Edge]) -> list[set[Edge]]:
     sides: list[set[Edge]] = []
     # Sort edges so that each edge in a side are looped through in order
     for edge in sorted(bag_of_edges, key=lambda e: (e.cell.x, e.cell.y)):
-        for side in sides:
-            if any(is_adjacent(edge, edge_in_side) for edge_in_side in side):
-                side.add(edge)
-                continue
-        if edge not in [e for edges in sides for e in edges]:
+        side_idx = idx_of_side_edge_is_part_of(edge, sides)
+        if side_idx is not None:
+            sides[side_idx].add(edge)
+        else:
             sides.append({edge})
     return sides
+
+
+def idx_of_side_edge_is_part_of(edge: Edge, sides: list[set[Edge]]) -> int | None:
+    for idx, side in enumerate(sides):
+        if any(is_adjacent(edge, edge_in_side) for edge_in_side in side):
+            return idx
+    return None
 
 
 def part_1(inputs: list[str]) -> int:
