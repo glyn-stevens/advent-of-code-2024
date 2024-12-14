@@ -86,6 +86,16 @@ class Coord:
         return f"C({self.x}, {self.y})"
 
 
+def in_grid(a: Coord, grid_size: Coord) -> bool:
+    return 0 <= a.x <= grid_size.x and 0 <= a.y <= grid_size.y
+
+
+def in_area(a: Coord, corner_1: Coord, corner_2: Coord) -> bool:
+    min_x, max_x = min(corner_1.x, corner_2.x), max(corner_1.x, corner_2.x)
+    min_y, max_y = min(corner_1.y, corner_2.y), max(corner_1.y, corner_2.y)
+    return min_x <= a.x <= max_x and min_y <= a.y <= max_y
+
+
 @dataclass(frozen=True)
 class Vector:
     x: int
