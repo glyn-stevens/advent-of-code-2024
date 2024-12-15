@@ -85,6 +85,9 @@ class Coord:
     def __repr__(self):
         return f"C({self.x}, {self.y})"
 
+    def __add__(self, vec: Vector):
+        return Coord(self.x + vec.x, self.y + vec.y)
+
 
 def in_grid(a: Coord, grid_size: Coord) -> bool:
     return 0 <= a.x <= grid_size.x and 0 <= a.y <= grid_size.y
