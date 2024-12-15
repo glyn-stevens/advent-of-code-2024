@@ -61,6 +61,13 @@ Could have utilised vector package on pypi alternatively.
 
 The twist for part b wasn't expected, and led to a big re-write and deeper dive into vector calculations.
 
+### Day 14
+Spent too long on part 2 - thought the tree would be symmetric, so spent a while checking for symmetry.
+Solved quickly the next morning by assuming that the robots would all be grouped together when the tree is formed,
+so the product of the number of robots in each sub-area of the grid would be smaller.
+A plot showed a potential candidate, which turned out to be correct:
+![day_14.png](day_14.png)
+
 ## Lint
 ```shell
 bin/list.ps1
