@@ -135,7 +135,7 @@ def box_mover_pt2(start: Coord, dir: Direction, grid: Grid) -> set[Coord] | None
         start = box_lh_half(start)
     elif start not in grid.boxes:
         raise ValueError(f"Start pos {start} must be a box")
-    boxes_not_yet_moved = copy.deepcopy(grid.boxes)
+    boxes_not_yet_moved = copy.copy(grid.boxes)
     boxes_not_yet_moved.remove(start)
     moved_boxes_both_halves = {start + dir.value, box_rh_half(start) + dir.value}
     boxes_to_move = {start}
