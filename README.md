@@ -1,33 +1,15 @@
 # advent-of-code-2024
 
-Glyn's solutions to the [advent of code 2024 puzzles](https://adventofcode.com/2024), lets see how this goes!
-
-## Setup
-Using poetry for package management. To setup venv folder with environment:
-```shell
-poetry install
-```
-
-## Use
-One file per day to be run as script.
-
-Run with, for example:
-```shell
-poetry run python advent_of_code/day_1.py
-```
+My solutions to the [advent of code 2024 puzzles](https://adventofcode.com/2024), lets see how this goes!
 
 ## Notes
-### Random thoughts
-- Some lessons in "you ain't gonna need it" when doing part 1.
-Spent time optimising in areas that, in the end, weren't useful for part 2.
-
 ### Day 5
 Used bubble sort - a more efficient method would have been possible but the compute time was still very small.
 
 ### Day 6
 Extremely slow performance in part 2 due to copying the entire grid each time the guard moved.
 Regression test not sensible due to performance.
-Improvements to do when have more time:
+Improvements could have made:
 - Store the Area as an (x, y) size, with obstacles and places visited stored as sets of coordinates.
 - Find the closest obstacle in the direction the guard is facing, and move immediately there, rather than single steps
   - Note: stepping through 1 space at a time still required for finding shortlist of all the potential obstacle locations for part 2
@@ -42,8 +24,11 @@ and the solution did take ~50s to solve using this method.
 With some time left, I managed to use tree logic to discount many of the possibilities much earlier in the checking process.
 This reduced time from ~50s to under 0.1s.
 
+Todo:
+
 ### Day 8
-Good handling of the grid (i.e. just storing the locations of the important items rather than storing the value for each cell in the grid)
+Good handling of the grid after the learning from day 6
+(i.e. just storing the locations of the important items rather than storing the value for each cell in the grid)
 helped the solver run very quickly, and a nice `print_grid()` function taking this storage of the grid as inputs still allowed easy debugging.
 
 ### Day 11
@@ -65,12 +50,30 @@ The twist for part b wasn't expected, and led to a big re-write and deeper dive 
 Spent too long on part 2 - thought the tree would be symmetric, so spent a while checking for symmetry.
 Solved quickly the next morning by assuming that the robots would all be grouped together when the tree is formed,
 so the product of the number of robots in each sub-area of the grid would be smaller.
-A plot showed a potential candidate, which turned out to be correct:
+A plot showed a potential candidate (the one with the very lowest value on the y axis), which turned out to be correct:
 ![day_14.png](day_14.png)
 
 ### Day 15
-Nothing clever here, but a gif of some of part 2:
+Nothing too clever here, but a gif of some of part 2:
 ![day_15_part_2.gif](day_15.gif)
+
+### Random thoughts
+- Some lessons in "you ain't gonna need it" when doing part 1.
+Spent time optimising in areas that, in the end, weren't useful for part 2.
+- Definitely learnt how to handle grids more efficiently...
+
+## Setup
+Using poetry for package management.
+```shell
+poetry install
+```
+
+## Use
+One file per day, to be run as a script.
+Run with, for example:
+```shell
+poetry run python advent_of_code/day_1.py
+```
 
 ## Lint
 ```shell
