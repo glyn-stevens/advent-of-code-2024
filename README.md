@@ -68,6 +68,10 @@ so the product of the number of robots in each sub-area of the grid would be sma
 A plot showed a potential candidate, which turned out to be correct:
 ![day_14.png](day_14.png)
 
+### Day 15
+Nothing clever here, but a video of some of part 2:
+[day_15.mp4](day_15.mp4)
+
 ## Lint
 ```shell
 bin/list.ps1

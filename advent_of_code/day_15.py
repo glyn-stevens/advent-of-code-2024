@@ -4,7 +4,9 @@ from enum import Enum
 from pathlib import Path
 from typing import Callable
 
-from advent_of_code.utils import read_input_stripped, solve, test, Coord, Vector
+import curses
+import time
+from advent_of_code.utils import read_input_stripped, solve, Coord, Vector, test
 
 
 class Direction(Enum):
@@ -19,13 +21,12 @@ DIR_FROM_CHAR = {"^": Direction.N, ">": Direction.E, "v": Direction.S, "<": Dire
 
 @dataclass
 class Grid:
-    # size: Coord
     robot: Coord
     boxes: set[Coord]
     walls: set[Coord]
 
     @property
-    def grid_size(self):
+    def size(self):
         return Coord(max(w.x for w in self.walls), max(w.y for w in self.walls))
 
 
@@ -50,9 +51,9 @@ def main():
     inputs = parse_inputs(read_input_stripped("day_15.txt"))
     sample_inputs = parse_inputs(read_input_stripped("day_15_sample.txt"))
     test(sample_inputs, part_1, "Part 1 test", expected=10092)
-    # solve(inputs, part_1, "Part 1")
-    test(sample_inputs, part_2, "Part 2 test", expected=9021)
-    solve(inputs, part_2, "Part 2")
+    solve(inputs, part_1, "Part 1")
+    test(sample_inputs, part_2_with_render, "Part 2 test", expected=9021)
+    solve(inputs, part_2_with_render, "Part 2")
 
 
 def parse_inputs(inputs: list[str]) -> ParsedInputs:
@@ -182,6 +183,49 @@ def part_2(inputs: ParsedInputs) -> int:
     grid = transform_to_pt_2(inputs.grid)
     for i, move in enumerate(inputs.moves):
         grid = move_robot(move, grid, box_at_coord_pt_2, box_mover_pt2)
+    return score(grid)
+
+
+def render_grid_pt_2(screen, grid: Grid) -> None:
+    rhs_boxes = {box_rh_half(b) for b in grid.boxes}
+    for y in range(grid.size.y + 1):
+        for x in range(grid.size.x + 1):
+            coord = Coord(x, y)
+            if coord in grid.boxes:
+                screen.addstr(y, x, "[", curses.color_pair(3))
+            elif coord in rhs_boxes:
+                screen.addstr(y, x, "]", curses.color_pair(3))
+            elif coord in grid.walls:
+                screen.addstr(y, x, "#", curses.color_pair(1))
+            elif grid.robot == coord:
+                screen.addstr(y, x, "@", curses.color_pair(2))
+            else:
+                screen.addstr(y, x, ".")
+
+
+def part_2_with_render(inputs: ParsedInputs):
+    def run(screen, grid: Grid):
+        screen_y, screen_x = screen.getmaxyx()
+        if grid.size.x > screen_x or grid.size.y > screen_y:
+            raise ValueError(
+                f"Terminal too small - zoom out. Got {(screen_x, screen_y)}, need: {grid.size}."
+            )
+        curses.curs_set(0)
+        curses.start_color()
+        curses.init_pair(1, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
+        curses.init_pair(2, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+        curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)
+        screen.clear()
+        for move in inputs.moves:
+            render_grid_pt_2(screen, grid)
+            screen.refresh()
+            grid = move_robot(move, grid, box_at_coord_pt_2, box_mover_pt2)
+            time.sleep(0.001)
+        render_grid_pt_2(screen, grid)
+        screen.refresh()
+        return grid
+
+    grid = curses.wrapper(run, transform_to_pt_2(inputs.grid))
     return score(grid)
 
 
