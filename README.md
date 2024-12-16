@@ -24,7 +24,7 @@ and the solution did take ~50s to solve using this method.
 With some time left, I managed to use tree logic to discount many of the possibilities much earlier in the checking process.
 This reduced time from ~50s to under 0.1s.
 
-Todo:
+Todo: look at the big-o notation - probably interesting here.
 
 ### Day 8
 Good handling of the grid after the learning from day 6
