@@ -69,8 +69,8 @@ A plot showed a potential candidate, which turned out to be correct:
 ![day_14.png](day_14.png)
 
 ### Day 15
-Nothing clever here, but a video of some of part 2:
-[day_15.mp4](day_15.mp4)
+Nothing clever here, but a gif of some of part 2:
+![day_15_part_2.gif](day_15.gif)
 
 ## Lint
 ```shell
