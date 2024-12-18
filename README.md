@@ -58,7 +58,13 @@ Nothing too clever here, but a gif of some of part 2:
 ![day_15_part_2.gif](day_15.gif)
 
 ### Day 16 
-Wow part 1 was hard until I learnt about Dijkstra's algorithm
+Wow, part 1 was hard for me, until I learnt about Dijkstra's algorithm.
+
+I started with a (naive, in hindsight) Depth First Search using a recursive function. 
+That ran into complexities, so used a Breadth First Search, but looped through routes rather than dequeueing by cost.
+That successfully solved all the tests I could throw at it, and found valid paths in the real input,
+but, despite much bug chasing, failed (crucially) to find the shortest one. Its downfall was its complexity.
+Finally, some internet searching helped get an implementation of Dijkstra's algo working, dequeueing by current cost.
 
 ### Random thoughts
 - Some lessons in "you ain't gonna need it" when doing part 1.
