@@ -57,6 +57,9 @@ A plot showed a potential candidate (the one with the very lowest value on the y
 Nothing too clever here, but a gif of some of part 2:
 ![day_15_part_2.gif](day_15.gif)
 
+### Day 16 
+Wow part 1 was hard until I learnt about Dijkstra's algorithm
+
 ### Random thoughts
 - Some lessons in "you ain't gonna need it" when doing part 1.
 Spent time optimising in areas that, in the end, weren't useful for part 2.
