@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 from functools import cached_property
 from pathlib import Path
-from advent_of_code.utils import read_input_stripped, solve, test, Coord
+from advent_of_code.utils import read_input_stripped, solve, test, Coord, parse_args, configure_logging
 
 import logging
 import heapq
@@ -60,7 +60,9 @@ class Grid:
 
 
 def main():
-
+    args=parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input_stripped("day_16.txt"))
     sample_inputs = parse_inputs(read_input_stripped("day_16_sample.txt"))
     sample_inputs2 = parse_inputs(read_input_stripped("day_16_sample2.txt"))
@@ -210,6 +212,21 @@ def dijkstra(grid: Grid, graph: dict[State, list[tuple[int, State]]]):
                 heapq.heappush(priority_queue, (candidate_cost, adjacent_state))
     return None
 
+def display(path_: list[Node], walls: set[Coord]) -> None:
+    for y in range(max(n.coord.y+2 for n in path_)):
+        line = ""
+        for x in range(max(n.coord.x+2 for n in path_)):
+            coord = Coord(x, y)
+            path_idx = next((i for i, path_pt in enumerate(path_) if path_pt.coord == coord), None)
+            if coord in walls:
+                line += "#"
+                if path_idx is not None:
+                    raise ValueError
+            elif path_idx is not None:
+                line += str(path_idx)[-1]
+            else:
+                line += "."
+        print(line)
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,11 @@ from dataclasses import dataclass
 from typing import Callable, TypeVar, Iterable
 
 from advent_of_code import ASSETS_DIR
+import logging
+import argparse
+import sys
+
+
 
 T = TypeVar("T")
 U = TypeVar("U")
@@ -88,6 +93,9 @@ class Coord:
     def __add__(self, vec: Vector):
         return Coord(self.x + vec.x, self.y + vec.y)
 
+    def __lt__(self, other: Coord):
+        return (self.y, self.x) < (other.y, other.x)
+
 
 def in_grid(a: Coord, grid_size: Coord) -> bool:
     return 0 <= a.x <= grid_size.x and 0 <= a.y <= grid_size.y
@@ -122,3 +130,27 @@ class Vector:
 
     def __mul__(self, other: int):
         return Vector(self.x * other, self.y * other)
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Set log verbosity.")
+    parser.add_argument(
+        '-v',
+        action='count',
+        default=0,
+        help="Increase verbosity with -v or -vv"
+    )
+    return parser.parse_args()
+
+def configure_logging(args:  argparse.Namespace) -> None:
+    if args.v == 1:
+        log_level = logging.INFO
+    elif args.v >= 2:
+        log_level = logging.DEBUG
+    else:
+        log_level = logging.WARNING
+
+    logging.basicConfig(
+        level=log_level,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        stream=sys.stderr
+    )
