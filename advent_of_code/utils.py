@@ -9,7 +9,6 @@ import argparse
 import sys
 
 
-
 T = TypeVar("T")
 U = TypeVar("U")
 INDENT = "    "
@@ -131,17 +130,14 @@ class Vector:
     def __mul__(self, other: int):
         return Vector(self.x * other, self.y * other)
 
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Set log verbosity.")
-    parser.add_argument(
-        '-v',
-        action='count',
-        default=0,
-        help="Increase verbosity with -v or -vv"
-    )
+    parser.add_argument("-v", action="count", default=0, help="Increase verbosity with -v or -vv")
     return parser.parse_args()
 
-def configure_logging(args:  argparse.Namespace) -> None:
+
+def configure_logging(args: argparse.Namespace) -> None:
     if args.v == 1:
         log_level = logging.INFO
     elif args.v >= 2:
@@ -150,7 +146,5 @@ def configure_logging(args:  argparse.Namespace) -> None:
         log_level = logging.WARNING
 
     logging.basicConfig(
-        level=log_level,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        stream=sys.stderr
+        level=log_level, format="%(asctime)s - %(levelname)s - %(message)s", stream=sys.stderr
     )

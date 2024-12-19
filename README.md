@@ -66,6 +66,11 @@ That successfully solved all the tests I could throw at it, and found valid path
 but, despite much bug chasing, failed (crucially) to find the shortest one. Its downfall was its complexity.
 Finally, some internet searching helped get an implementation of Dijkstra's algo working, dequeueing by current cost.
 
+The struggle with debugging led to introducing logging to allow debug printing to be turned on and off easily.
+
+Part 2 was a nice, relatively simple addition, after the initial algorithm was done. 
+Caching keeps the part 1 and part 2 functions neatly separated, whilst enabling tests to run more quickly.
+
 ### Random thoughts
 - Some lessons in "you ain't gonna need it" when doing part 1.
 Spent time optimising in areas that, in the end, weren't useful for part 2.
