@@ -1,9 +1,12 @@
+import logging
 from pathlib import Path
-from advent_of_code.utils import read_input_stripped, solve, test
+from advent_of_code.utils import read_input_stripped, solve, test, parse_args, configure_logging
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input_stripped("day_11.txt"))
     sample_inputs = [125, 17]
     test(sample_inputs, part_1, "Part 1 test", expected=55312)

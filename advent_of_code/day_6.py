@@ -1,4 +1,5 @@
 import copy
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -8,6 +9,8 @@ from advent_of_code.utils import (
     solve,
     test,
     idx_of_first_match,
+    parse_args,
+    configure_logging,
 )
 
 
@@ -83,7 +86,6 @@ class Area:
                 next_idx = Position(gp.row_idx, gp.col_idx - 1)
             case _:
                 raise ValueError(f"Invalid direction: {self.guard_direction}")
-        # print(f"{gp=}, {next_idx}")
         return next_idx
 
     def move(self):
@@ -91,10 +93,10 @@ class Area:
         self.set_grid_idx(self.guard_position, GridValue.GUARD_BEEN)
         if self.position_valid(next_space_idx):
             if self.get_grid_value(next_space_idx) == GridValue.OBSTACLE:
-                # print("Turning")
+                logging.debug("Turning")
                 self.set_guard_direction(turn_right(self.guard_direction))
             else:
-                # print(f"Moving guard to {next_space_idx}")
+                logging.debug(f"Moving guard to {next_space_idx}")
                 self.set_guard_position(next_space_idx)
         else:
             raise GoneBeyondGridError("Guard gone beyond grid")
@@ -126,15 +128,15 @@ class Area:
         )
 
     def print(self):
-        print(f"Guard pos = {self.guard_position}, Grid = \n")
+        logging.info(f"Guard pos = {self.guard_position}, Grid = \n")
         for i, line in enumerate(self.grid):
             if i == self.guard_position.row_idx:
                 guard = GUARD_CHAR[self.guard_direction]
-                print(
+                logging.info(
                     f"{line_to_str(line[:self.guard_position.col_idx])}{guard}{line_to_str(line[self.guard_position.col_idx + 1:])}"
                 )
             else:
-                print(line_to_str(line))
+                logging.info(line_to_str(line))
 
 
 def line_to_str(line: list[GridValue]) -> str:
@@ -150,10 +152,12 @@ def parse_area(inputs: list[str]) -> Area:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = read_input("day_6.txt")
     sample_inputs = read_input("day_6_sample.txt")
-    # test(sample_inputs, part_1, "Part 1 test", expected=41)
+    test(sample_inputs, part_1, "Part 1 test", expected=41)
     solve(inputs, part_1, "Part 1")
     test(sample_inputs, part_2, "Part 2 test", expected=6)
     solve(inputs, part_2, "Part 2")
@@ -179,7 +183,7 @@ def part_2(inputs: list[str]) -> int:
             potential_blockade_pos
         ) in [GridValue.OBSTACLE, GridValue.GUARD_BEEN]:
             # Can't put it where guard has been, and doesn't change outcome if space is already an obstacle
-            print(f"Not trying blockade in {potential_blockade_pos}")
+            logging.info(f"Not trying blockade in {potential_blockade_pos}")
         else:
             # Try putting an obstacle immediately ahead of guard
             test_area = copy.deepcopy(area)
@@ -187,13 +191,13 @@ def part_2(inputs: list[str]) -> int:
             test_area_guard_posns: set[tuple[Position, Direction]] = set()
             while True:
                 try:
-                    # print(f"{test_area.guard_position}")
+                    logging.debug(f"{test_area.guard_position}")
                     test_area.move()
                     if (
                         test_area.guard_position,
                         test_area.guard_direction,
                     ) in test_area_guard_posns:
-                        print("Found blockade posn...")
+                        logging.debug("Found blockade posn...")
                         possible_blockade_positions.add(potential_blockade_pos)
                         break
                     else:
@@ -207,7 +211,7 @@ def part_2(inputs: list[str]) -> int:
                     break
         try:
             area.move()
-            # print(f"{area.guard_position=}")
+            logging.debug(f"{area.guard_position=}")
         except GoneBeyondGridError:
             break
     if sexy:

@@ -1,4 +1,5 @@
 import copy
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -6,7 +7,15 @@ from typing import Callable
 
 import curses
 import time
-from advent_of_code.utils import read_input_stripped, solve, Coord, Vector, test
+from advent_of_code.utils import (
+    read_input_stripped,
+    solve,
+    Coord,
+    Vector,
+    test,
+    parse_args,
+    configure_logging,
+)
 
 
 class Direction(Enum):
@@ -47,7 +56,9 @@ class ParsedInputs:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input_stripped("day_15.txt"))
     sample_inputs = parse_inputs(read_input_stripped("day_15_sample.txt"))
     test(sample_inputs, part_1, "Part 1 test", expected=10092)

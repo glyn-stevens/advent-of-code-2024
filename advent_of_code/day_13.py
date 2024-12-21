@@ -1,8 +1,16 @@
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 import re
 
-from advent_of_code.utils import read_input_stripped, solve, test, Vector
+from advent_of_code.utils import (
+    read_input_stripped,
+    solve,
+    test,
+    Vector,
+    parse_args,
+    configure_logging,
+)
 
 
 @dataclass(frozen=True)
@@ -23,7 +31,9 @@ def is_positive_int(num: float) -> bool:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input_stripped("day_13.txt"))
     sample_inputs = parse_inputs(read_input_stripped("day_13_sample.txt"))
     test(sample_inputs, part_1, "Part 1 test", expected=480)

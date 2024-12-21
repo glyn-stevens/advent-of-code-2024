@@ -1,7 +1,8 @@
+import logging
 from pathlib import Path
 import re
 from advent_of_code import ASSETS_DIR
-from advent_of_code.utils import solve, test_multiple
+from advent_of_code.utils import solve, test_multiple, parse_args, configure_logging
 
 TEST_SAMPLE_PART_1 = [
     "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))",
@@ -15,7 +16,9 @@ TEST_SAMPLE_PART_2 = (
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     with open(ASSETS_DIR / "day_3.txt") as f:
         inputs = "".join(f.readlines())
 

@@ -6,7 +6,6 @@ from typing import Callable, TypeVar, Iterable
 from advent_of_code import ASSETS_DIR
 import logging
 import argparse
-import sys
 
 
 T = TypeVar("T")
@@ -15,7 +14,7 @@ INDENT = "    "
 
 
 def solve(input: T, solver: Callable[[T], U], description: str) -> U:
-    print(f"\n🤞 Solving {description}...")
+    logging.info(f"🤞 Solving {description}...")
     output = _solve_with_log(input, solver, description)
     return output
 
@@ -23,7 +22,7 @@ def solve(input: T, solver: Callable[[T], U], description: str) -> U:
 def test_multiple(
     inputs: list[T], solver: Callable[[T], U], description: str, expected: list[U]
 ) -> list[U]:
-    print(f"\n🧪 Running tests for {description}...")
+    logging.info(f"\n🧪 Running tests for {description}...")
     return [
         _check(_solve_with_log(input, solver, f"{description} - test {i}"), expect)
         for i, (input, expect) in enumerate(zip(inputs, expected, strict=True))
@@ -31,20 +30,22 @@ def test_multiple(
 
 
 def test(inputs: T, solver: Callable[[T], U], description: str, expected: U) -> U:
-    print(f"\n🧪 Running test for {description}...")
+    logging.info(f"🧪 Running test for {description}...")
     return _check(_solve_with_log(inputs, solver, f"{description} - test"), expected)
 
 
 def _check(output: T, expected: T) -> T:
-    assert output == expected, f"\n{INDENT}❌ Checks failed\nGot: {output}\nExpected: {expected}"
-    print(f"{INDENT}✅ Checks passed")
+    if output != expected:
+        logging.error(f"{INDENT}❌ Checks failed. Got: {output}. Expected: {expected}")
+        raise ValueError(f"Got: {output}. Expected: {expected}")
+    logging.info(f"{INDENT}✅ Checks passed")
     return output
 
 
 def _solve_with_log(input: T, solver: Callable[[T], U], description: str) -> U:
-    print(f"{INDENT}Input for {description} is '{str(input)[:40]}...'")
+    logging.info(f"{INDENT}Input for {description} is '{str(input)[:40]}...'")
     output = solver(input)
-    print(f"{INDENT}👉 Solution: {output}")
+    print(f"{INDENT*5}👉 Solution is: {output} for {description}")
     return output
 
 
@@ -146,5 +147,7 @@ def configure_logging(args: argparse.Namespace) -> None:
         log_level = logging.WARNING
 
     logging.basicConfig(
-        level=log_level, format="%(asctime)s - %(levelname)s - %(message)s", stream=sys.stderr
+        level=log_level,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        datefmt="%H:%M:%S",
     )

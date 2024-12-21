@@ -315,7 +315,7 @@ def display(paths: set[Coord], walls: FrozenSet[Coord]) -> None:
                 line += "0"
             else:
                 line += "."
-        print(line)
+        logging.info(line)
 
 
 if __name__ == "__main__":

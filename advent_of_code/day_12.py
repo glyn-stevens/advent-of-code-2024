@@ -1,7 +1,15 @@
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from advent_of_code.utils import read_input_stripped, solve, test, Coord
+from advent_of_code.utils import (
+    read_input_stripped,
+    solve,
+    test,
+    Coord,
+    parse_args,
+    configure_logging,
+)
 
 
 class Direction(Enum):
@@ -52,7 +60,9 @@ def is_adjacent(a: Edge, b: Edge) -> bool:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = read_input_stripped("day_12.txt")
     sample_inputs = read_input_stripped("day_12_sample.txt")
     test(sample_inputs, part_1, "Part 1 test", expected=1930)

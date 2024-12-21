@@ -1,8 +1,18 @@
+import logging
 import math
 from dataclasses import dataclass
 from pathlib import Path
 import re
-from advent_of_code.utils import read_input_stripped, solve, test, Vector, Coord, in_area_inclusive
+from advent_of_code.utils import (
+    read_input_stripped,
+    solve,
+    test,
+    Vector,
+    Coord,
+    in_area_inclusive,
+    configure_logging,
+    parse_args,
+)
 
 
 @dataclass(frozen=True)
@@ -31,7 +41,9 @@ Rectangle = tuple[Coord, Coord]
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = Area(parse_inputs(read_input_stripped("day_14.txt")), Coord(100, 102))
     sample_inputs = Area(parse_inputs(read_input_stripped("day_14_sample.txt")), Coord(10, 6))
     test(sample_inputs, part_1, "Part 1 test", expected=12)

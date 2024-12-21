@@ -89,6 +89,8 @@ Run with, for example:
 poetry run python advent_of_code/day_1.py
 ```
 
+To include debug and/or info logging statements (where available), use flag `-v` or `-vv`.
+
 ## Lint
 ```shell
 bin/list.ps1

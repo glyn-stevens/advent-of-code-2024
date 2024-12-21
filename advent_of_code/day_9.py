@@ -1,6 +1,7 @@
+import logging
 from dataclasses import dataclass
 from pathlib import Path
-from advent_of_code.utils import read_input_stripped, solve, test
+from advent_of_code.utils import read_input_stripped, solve, test, configure_logging, parse_args
 
 
 @dataclass
@@ -14,7 +15,9 @@ class InitialFile:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input_stripped("day_9.txt"))
     sample_inputs = parse_inputs(["2333133121414131402"])
     test(sample_inputs, part_1, "Part 1 test", expected=1928)

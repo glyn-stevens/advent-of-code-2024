@@ -1,4 +1,5 @@
 import itertools
+import logging
 from dataclasses import dataclass
 from enum import Enum, member
 from operator import mul, add
@@ -7,7 +8,7 @@ from typing import Iterator, TypeVar
 
 from more_itertools import distinct_permutations
 
-from advent_of_code.utils import read_input, solve, flatten
+from advent_of_code.utils import read_input, solve, flatten, parse_args, configure_logging
 
 
 @dataclass(frozen=True)
@@ -83,9 +84,11 @@ def is_match_by_final_digits(to_check: int, query: int) -> bool:
 
 
 def main():
-    print(f"Running script {Path(__file__).name}...")
+    args = parse_args()
+    configure_logging(args)
+    logging.info(f"Running script {Path(__file__).name}...")
     inputs = parse_inputs(read_input("day_7.txt"))
-    print(f"Max params = {max(len(e.parameters) for e in inputs)}")
+    logging.info(f"Max params = {max(len(e.parameters) for e in inputs)}")
     solve(inputs, part_1, "Part 1")
     solve(inputs, part_2_fast, "Part 2")
 
