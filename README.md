@@ -71,6 +71,31 @@ The struggle with debugging led to introducing logging to allow debug printing t
 Part 2 was a nice, relatively simple addition, after the initial algorithm was done. 
 Caching keeps the part 1 and part 2 functions neatly separated, whilst enabling tests to run more quickly.
 
+### Day 17
+Part 1 easy. Tried OOP, because why not.
+Solves in O(n) where n is program length.
+
+Part 2:
+Brute force would have been O(n^n). 
+Analysing the program allowed a solution to be found in O(n),
+though in a way that's less generalisable to other programs.
+
+Notes:
+- Program is 8 instructions long (so 16 digits) and outputs once per loop
+  - This output is 'B' modulo 8, so it's last 3 bits of 'B' (instruction 7)
+- Program ends when 'A' equals 0
+- Only one jump each loop - from the end to the start (instruction 8)
+- 'A' gets divided by 8 each loop (flooring the result), and is otherwise untouched (instruction 6), 
+ and 8^y in binary is 100000... (with 3*y trailing 0s)
+  - This divide by 8 effectively removes the last 3 bits from the number in 'A'
+  - So 8^15 < 'A' < 8^16 for output length to be 16 (i.e. length of the program)
+    - Confirmed by running different input values for A for part 1 code
+    - This means we could brute force, solving in O(n^n) where n is equal to program length 
+  - This also means running the program with 0 < 'A' < 8 must output the last digit in the program,
+and that adding and preceding binary digits won't affect the final digit ouput.
+    - Then adding 3 preceding binary digits and running 1 loop must output the second last digit in the program, etc
+  - This can be used to solve in O(n)
+
 ### Random thoughts
 - Some lessons in "you ain't gonna need it" when doing part 1.
 Spent time optimising in areas that, in the end, weren't useful for part 2.
