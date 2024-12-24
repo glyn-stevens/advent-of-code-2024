@@ -96,6 +96,12 @@ and that adding and preceding binary digits won't affect the final digit ouput.
     - Then adding 3 preceding binary digits and running 1 loop must output the second last digit in the program, etc
   - This can be used to solve in O(n)
 
+### Day 19
+Started with a recursive depth first search for part 1, 
+then tried a looped breadth first search for part 2 as we had to cover all possibilities,
+before realising that depth first was still going to be simpler, so changing the recursive search from p1.
+
+
 ### Random thoughts
 - Some lessons in "you ain't gonna need it" when doing part 1.
 Spent time optimising in areas that, in the end, weren't useful for part 2.
