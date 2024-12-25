@@ -108,23 +108,23 @@ My laptop melted just turning the combinations iterator into a list, so pure bru
 
 I had two ideas:
 1. Just make a plot of the circuit diagram and see if it's regular enough to be able to visually check what's wrong.
-If it was an optimised adder, it would be regular, but this being tricksy I thought there was a chance it was just spaghetti.
-This is totally manual, so is O(n^_human-speed_), which isn't appealing as an algorithm.
+If it was an optimised adder, it would be regular, but AOC being tricksy there was a chance it was just spaghetti.
+This is totally manual, so is O(n^_human-speed_).
 
 2. In a binary adder of x and y, a digit in the result only depends on the digits in x and y that are in the same spot or further to the right.
-e.g. adding 010 with 010 gives 110. The third digit (one on the right) doesn't get affected by the first and second digits.
 This means that we could swap one of each possible pair, and then test the resulting system with a bunch of carefully crafted test inputs,
-and the result which has the most digits from the RHS correct (taking the minimum across the test inputs) will be the correct swap.
+and the result which has the most digits from the RHS correct (taking the minimum score across the test inputs) would be the correct swap.
 Once the first correct swap is found, the next swap can be found, and so on.
-This will fall down if there are many swaps, but the puzzle states that there are only 4 swaps here.
-There are 24531 different pairs which can be swapped, so this solution should mean looping through ~100,000 different systems in total.
-This is O(n^2)
+If multiple swaps give the same score, we could continue analysing both of them.
 
-I tried option 2 first. It worked well, once the test x and y samples were tuned, but takes ~30 mins to complete.
+    This will fall down if there are many swaps, but the puzzle states that there are only 4 swaps.
+    This is O(n^2) and as there are 24531 different pairs which can be swapped, this means looping through ~100,000 different logic circuits in total.
+
+I tried option 2 first. It worked well, once the test x and y samples were tuned, but took ~30 mins to complete.
 I did option 1 in the meantime - which turned out to be much easier for solving the puzzle just once as the circuit is very regular.
 
-Once I'd seen the logic circuit is very regular,
-it was clear that some careful analysis of each logic gate and what a gate of that type is expected to be connected to could have reduced the algorithm to O(n).
+Seeing that the logic circuit is indeed very regular,
+an algorithm with some careful analysis of each logic gate and its connections to could reduce the algorithm to O(n).
 
 Original circuit diagram:
 ![day 24 circuit](day_24_original_circuit.png)
