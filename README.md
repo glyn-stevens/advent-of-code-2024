@@ -3,6 +3,10 @@
 My solutions to the [advent of code 2024 puzzles](https://adventofcode.com/2024), lets see how this goes!
 
 ## Notes
+
+### Todo
+- look at the big-o notation in day 7 and day 23 - probably interesting here.
+
 ### Day 5
 Used bubble sort - a more efficient method would have been possible but the compute time was still very small.
 
@@ -23,8 +27,6 @@ But for part 2, up to 531441 calculations would be needed per equation using the
 and the solution did take ~50s to solve using this method.
 With some time left, I managed to use tree logic to discount many of the possibilities much earlier in the checking process.
 This reduced time from ~50s to under 0.1s.
-
-Todo: look at the big-o notation - probably interesting here.
 
 ### Day 8
 Good handling of the grid after the learning from day 6
