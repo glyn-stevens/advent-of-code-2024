@@ -101,6 +101,17 @@ Started with a recursive depth first search for part 1,
 then tried a looped breadth first search for part 2 as we had to cover all possibilities,
 before realising that depth first was still going to be simpler, so changing the recursive search from p1.
 
+### Day 23
+One of the days when part 1 was very helpful for part 2.
+
+Part 1 involved going from a list of connected pairs of nodes to the number of sets of 3 nodes which are all connected to each other.
+
+Part 2 involved finding the largest set of nodes where each node is connected to each other.
+For each node in a set to be connected to all other nodes in the set, 
+each possible combinations of three nodes in the set must be involved in a triple.
+This means the result from Part 1 is nice to use as an input for Part 2 to reduce the number of combinations that need checking.
+
+
 ### Day 24
 We need to swap 4 pairs in a list of ~200 logic gates. Blindly trying all the options would be O(n^8) where n is the number of logic gates.
 Just to see what we were working with, I calculated the combinations of 4 different pairs from the ~200.
